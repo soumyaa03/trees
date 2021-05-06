@@ -1,0 +1,117 @@
+
+
+public class treetraversals {
+
+    public static class Node//creation of node
+    {
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int data)
+        {
+           this.data=data;
+           this.left=null;
+           this.right=null;
+        }
+    }
+    public Node root;
+    
+   
+    treetraversals()
+    {
+        root=null;
+        
+    }
+    void insert(int data)
+    {
+        Node t=new Node(data);
+        
+        if(root==null)
+        {
+            root=t;
+            return;
+        }
+        else
+        {
+            Node current=root,parent=null;
+            
+           while(true)
+           {
+               parent=current;
+               if(data < current.data)
+               {
+                   current=current.left;
+                   if(current==null)
+                   {
+                       parent.left=t;
+                       return;
+                   }
+               }
+               else if(data>current.data)
+               {
+                   current=current.right;
+                   if(current==null)
+                   {
+                       parent.right=t;
+                       return;
+                   }
+               }
+           }
+
+        }
+    }
+    void inorder(Node in)
+    {
+        if (in!=null){
+        inorder(in.left);
+        System.out.print(in.data+" ");
+        inorder(in.right);}
+        
+    }
+    void preorder(Node pre)
+    {
+        if(pre!=null){
+        preorder(pre.left);
+        preorder(pre.right);
+        System.out.print(pre.data+" ");}
+    }
+    void postorder(Node post)
+    {
+        if(post!=null){
+        System.out.print(post.data+" ");
+        postorder(post.left);
+        postorder(post.right);}
+    }
+    
+    public static void main(String args[])
+
+    {
+        treetraversals ob= new treetraversals();
+        ob.insert(50);
+        ob.insert(30);
+        ob.insert(70);
+        ob.insert(60);
+      ob.insert(10);
+       ob.insert(90);
+        System.out.println("Inorder traversal");
+        ob.inorder(ob.root);
+        System.out.println();
+       System.out.println("Preorder traversal");
+       
+     ob.preorder(ob.root);
+     System.out.println();
+        System.out.println("Postorder traversal");
+        ob.postorder(ob.root);
+         
+      
+
+    }
+
+
+
+    
+
+
+    
+}
