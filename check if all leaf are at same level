@@ -1,0 +1,73 @@
+public class leaflevel {
+    public static class Node{
+        int data;
+        Node left;Node right;
+        public Node(int data){
+            this.data=data;
+            this.left=null;
+            this.right=null;
+
+        }
+    }
+        public Node root;public int level,maxlevel;
+        
+
+        leaflevel() {
+            root = null;
+            level=0;
+            maxlevel=0;
+            
+
+        }
+
+        boolean isSameLevel(Node root,int level) 
+        {
+            if(root==null)
+            return true;
+            if(root.left==null && root.right==null)
+            {
+                if(maxlevel==0)
+                {maxlevel=level;return true;}
+                else
+                {
+                if(maxlevel==level)
+                return true;
+                else
+                return false;
+                }
+            }
+            
+            return isSameLevel(root.left, level+1) && isSameLevel(root.right, level+1);
+
+        }
+        boolean isSameLevelUtil(Node root)
+        {
+            level=0;
+            return isSameLevel(root,level);
+        }
+           
+        public static void main(String args[]) {
+            leaflevel ob = new leaflevel();
+            Node root = new Node(4);                     /*              4                            */
+            root.left = new Node(2);                     /*            /   \                          */
+           root.right = new Node(5);                    /*            2     5                         */
+           root.left.left = new Node(7);                /*           /\    / \                        */
+           root.left.right = new Node(1);                /*         7  1  2   3                       */
+            root.right.left = new Node(2);               /*           /  /                           */
+           root.right.left.left = new Node(8);        /*             6  8                            */
+           root.right.right = new Node(3);              /*                                           */
+            root.left.right.left = new Node(6);        /*                                           */
+            if(ob.isSameLevelUtil(root)==true)
+            
+                System.out.println("all leaf nodes are at same level");
+                else
+                  System.out.println("all leaf nodes are not at same level");
+
+            
+            
+            
+        }
+        
+    }
+    
+
