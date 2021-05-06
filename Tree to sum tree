@@ -1,0 +1,57 @@
+public class Tree_to_SumTree {
+    public static class Node{
+        int data;
+        Node left;
+        Node right;
+        public Node(int data)
+        {
+            this.data=data;
+            this.left=null;
+            this.right=null;
+        }
+    }
+    public Node root;
+    public Tree_to_SumTree()
+    {
+        root=null;
+    }
+    void inorder(Node in)
+    {
+        if (in!=null){
+        inorder(in.left);
+        System.out.print(in.data+" ");
+        inorder(in.right);}
+        
+    }
+    int toSumtree(Node temp)
+    {
+        if(temp==null)
+        {
+            return 0;
+        }
+        int old_data=temp.data;
+        temp.data= toSumtree(temp.left)+toSumtree(temp.right);
+        return temp.data + old_data;
+
+    }
+    public static void main(String args[])
+    {
+        Tree_to_SumTree ob=new Tree_to_SumTree();
+        ob.root=new Node(10);
+        ob.root.left=new Node(-2);
+        ob.root.right=new Node(6);
+        ob.root.left.left=new Node(8);
+        ob.root.left.right=new Node(-4);
+        ob.root.right.left=new Node(7);
+        ob.root.right.right=new Node(5);
+        ob.toSumtree(ob.root);
+        System.out.println("Tree after result");
+        ob.inorder(ob.root);
+
+
+
+
+    }
+
+    
+}
