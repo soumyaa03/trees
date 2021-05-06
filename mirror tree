@@ -1,0 +1,58 @@
+public class mirrortree {
+    public static class Node//creation of node
+    {
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int data)
+        {
+           this.data=data;
+           this.left=null;
+           this.right=null;
+        }
+    }
+    public Node root;
+    mirrortree()
+    {
+        root=null;
+    }
+    Node mirrorify(Node root)
+    {
+
+        if(root==null)
+        {
+            
+            return null;
+        }
+       Node mirror=new Node(root.data);
+        mirror.right=mirrorify(root.left);
+        mirror.left=mirrorify(root.right);
+        return mirror;
+
+    }
+    void inorder(Node in)
+    {
+        if (in!=null){
+        inorder(in.left);
+        System.out.print(in.data+" ");
+        inorder(in.right);}
+        
+    }
+    public static void main(String args[])
+    {
+        mirrortree ob =new mirrortree();
+        ob.root=new Node(1);
+
+        ob.root.left=new Node(2);
+        ob.root.right=new Node(3);
+        System.out.println("Original tree");
+        ob.inorder(ob.root);
+        System.out.println();
+        Node mirror=null;
+        mirror=ob.mirrorify(ob.root);
+        System.out.println("Mirror Tree");
+        ob.inorder(mirror);
+    }
+    
+}
