@@ -1,0 +1,88 @@
+public class StringtoTree
+ {
+    public class Node
+    {
+        int data;
+        Node left;
+        Node right;
+        public Node(int data)
+        {
+            this.data=data;
+            this.left=null;
+            this.right=null;
+        }
+
+
+    }
+
+    
+
+    
+    public Node root;public int start;
+    StringtoTree()
+    {
+        root=null;
+        start=0;
+    }
+    
+        public Node str2tree(String s)
+         {
+            if(start>s.length())
+            return null;
+            int num=0;
+            while(start<s.length() && Character.isDigit(s.charAt(start)))
+            {
+                int digit=Character.getNumericValue(s.charAt(start));
+                num=num*10 + digit;
+                start ++;
+            }
+            Node root=new Node(num);
+            if(start>=s.length())
+            {
+                return root;
+
+            }
+            if(start<s.length() && s.charAt(start)=='(')
+            {
+                start++;
+                root.left=str2tree(s);
+            }
+            if(start<s.length() && s.charAt(start)==')')
+            {
+                start++;
+                return root;
+
+            }
+            if(start<s.length() && s.charAt(start)=='(')
+            {
+                start++;
+                root.right=str2tree(s);
+            }
+            if(start<s.length() && s.charAt(start)==')')
+            {
+                start++;
+                return root;
+            }
+            return root;
+
+            
+        }
+        void inorder(Node in)
+    {
+        if (in!=null){
+        inorder(in.left);
+        System.out.print(in.data+" ");
+        inorder(in.right);}
+        
+    }
+        public static void main(String args[])
+        {
+            StringtoTree ob = new StringtoTree();
+            String str="1(5(2)(3))(6(7)(8))";
+           Node root=ob.str2tree(str);
+           ob.inorder(root);
+        }
+    }
+    
+
+
