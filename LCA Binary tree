@@ -1,0 +1,52 @@
+public class LCA_binarytree {
+    public static class Node
+    {
+        int data;Node left,right;
+        public  Node(int data)
+        {
+            this.data=data;
+            this.left=null;
+            this.right=null;
+
+        }
+    }
+    public Node root;
+    Node LCA(int a,int b)
+    {
+        return LCA(root, a, b);
+
+    }
+    Node LCA(Node root,int a,int b)
+    {
+        if(root==null)
+        return null;
+
+        if(root.data==a||root.data==b)
+        return root;
+
+        Node left_LCA=LCA(root.left,a,b);
+        Node right_LCA=LCA(root.right,a,b);
+
+        if(left_LCA!=null && right_LCA!=null)
+        return root;
+
+        return (left_LCA!=null)?left_LCA:right_LCA;
+
+    }
+    public static void main(String args[])
+    {
+        LCA_binarytree ob=new LCA_binarytree();
+         ob.root=new Node(1);
+        
+        ob.root.left = new Node(2);
+        ob.root.right = new Node(3);
+      ob. root.left.left = new Node(4);
+      ob. root.left.right = new Node(5);
+
+       ob.root.right.left = new Node(6);
+       ob.root.right.right = new Node(7);
+        System.out.println("LCA(4,6) : "+ob.LCA(4, 6).data);
+        
+    }
+    
+}
